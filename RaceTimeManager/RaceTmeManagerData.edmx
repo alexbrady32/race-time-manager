@@ -1,0 +1,350 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="RaceTimeManagerEntity.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="RaceEntry">
+          <Key>
+            <PropertyRef Name="RaceID" />
+            <PropertyRef Name="BibNumber" />
+          </Key>
+          <Property Name="RaceID" Type="int" Nullable="false" />
+          <Property Name="BibNumber" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RunnerID" Type="int" />
+        </EntityType>
+        <EntityType Name="Races">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RaceName" Type="varchar" MaxLength="50" />
+          <Property Name="RaceDate" Type="date" />
+          <Property Name="Distance" Type="decimal" Precision="14" Scale="8" />
+          <Property Name="Units" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Runners">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="25" />
+          <Property Name="LastName" Type="varchar" MaxLength="25" />
+          <Property Name="DOB" Type="date" />
+        </EntityType>
+        <EntityType Name="Splits">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BibNumber" Type="int" />
+          <Property Name="RaceID" Type="int" />
+          <Property Name="SplitDistance" Type="decimal" Precision="14" Scale="8" />
+          <Property Name="SplitUnits" Type="varchar" MaxLength="10" />
+          <Property Name="SplitTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="StartFinishTimes">
+          <Key>
+            <PropertyRef Name="BibNumber" />
+            <PropertyRef Name="RaceID" />
+          </Key>
+          <Property Name="BibNumber" Type="int" Nullable="false" />
+          <Property Name="RaceID" Type="int" Nullable="false" />
+          <Property Name="StartTime" Type="datetime" />
+          <Property Name="FinishTime" Type="datetime" />
+        </EntityType>
+        <Association Name="FK__RaceEntry__RaceI__44FF419A">
+          <End Role="Races" Type="Self.Races" Multiplicity="1" />
+          <End Role="RaceEntry" Type="Self.RaceEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Races">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RaceEntry">
+              <PropertyRef Name="RaceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RaceEntry__Runne__440B1D61">
+          <End Role="Runners" Type="Self.Runners" Multiplicity="0..1" />
+          <End Role="RaceEntry" Type="Self.RaceEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Runners">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RaceEntry">
+              <PropertyRef Name="RunnerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Splits__47DBAE45">
+          <End Role="RaceEntry" Type="Self.RaceEntry" Multiplicity="0..1" />
+          <End Role="Splits" Type="Self.Splits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RaceEntry">
+              <PropertyRef Name="RaceID" />
+              <PropertyRef Name="BibNumber" />
+            </Principal>
+            <Dependent Role="Splits">
+              <PropertyRef Name="RaceID" />
+              <PropertyRef Name="BibNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StartFinishTimes__4E88ABD4">
+          <End Role="RaceEntry" Type="Self.RaceEntry" Multiplicity="1" />
+          <End Role="StartFinishTimes" Type="Self.StartFinishTimes" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="RaceEntry">
+              <PropertyRef Name="RaceID" />
+              <PropertyRef Name="BibNumber" />
+            </Principal>
+            <Dependent Role="StartFinishTimes">
+              <PropertyRef Name="RaceID" />
+              <PropertyRef Name="BibNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RaceTimeManagerEntityStoreContainer">
+          <EntitySet Name="RaceEntry" EntityType="Self.RaceEntry" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Races" EntityType="Self.Races" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Runners" EntityType="Self.Runners" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Splits" EntityType="Self.Splits" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StartFinishTimes" EntityType="Self.StartFinishTimes" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__RaceEntry__RaceI__44FF419A" Association="Self.FK__RaceEntry__RaceI__44FF419A">
+            <End Role="Races" EntitySet="Races" />
+            <End Role="RaceEntry" EntitySet="RaceEntry" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RaceEntry__Runne__440B1D61" Association="Self.FK__RaceEntry__Runne__440B1D61">
+            <End Role="Runners" EntitySet="Runners" />
+            <End Role="RaceEntry" EntitySet="RaceEntry" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Splits__47DBAE45" Association="Self.FK__Splits__47DBAE45">
+            <End Role="RaceEntry" EntitySet="RaceEntry" />
+            <End Role="Splits" EntitySet="Splits" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StartFinishTimes__4E88ABD4" Association="Self.FK__StartFinishTimes__4E88ABD4">
+            <End Role="RaceEntry" EntitySet="RaceEntry" />
+            <End Role="StartFinishTimes" EntitySet="StartFinishTimes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RaceTimeManagerEntity" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="RaceEntry">
+          <Key>
+            <PropertyRef Name="RaceID" />
+            <PropertyRef Name="BibNumber" />
+          </Key>
+          <Property Name="RaceID" Type="Int32" Nullable="false" />
+          <Property Name="BibNumber" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RunnerID" Type="Int32" />
+          <NavigationProperty Name="Race" Relationship="Self.FK__RaceEntry__RaceI__44FF419A" FromRole="RaceEntry" ToRole="Races" />
+          <NavigationProperty Name="Runner" Relationship="Self.FK__RaceEntry__Runne__440B1D61" FromRole="RaceEntry" ToRole="Runners" />
+          <NavigationProperty Name="Splits" Relationship="Self.FK__Splits__47DBAE45" FromRole="RaceEntry" ToRole="Splits" />
+          <NavigationProperty Name="StartFinishTime" Relationship="Self.FK__StartFinishTimes__4E88ABD4" FromRole="RaceEntry" ToRole="StartFinishTimes" />
+        </EntityType>
+        <EntityType Name="Race">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RaceName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RaceDate" Type="DateTime" Precision="0" />
+          <Property Name="Distance" Type="Decimal" Precision="14" Scale="8" />
+          <Property Name="Units" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="RaceEntries" Relationship="Self.FK__RaceEntry__RaceI__44FF419A" FromRole="Races" ToRole="RaceEntry" />
+        </EntityType>
+        <EntityType Name="Runner">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="DOB" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="RaceEntries" Relationship="Self.FK__RaceEntry__Runne__440B1D61" FromRole="Runners" ToRole="RaceEntry" />
+        </EntityType>
+        <EntityType Name="Split">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BibNumber" Type="Int32" />
+          <Property Name="RaceID" Type="Int32" />
+          <Property Name="SplitDistance" Type="Decimal" Precision="14" Scale="8" />
+          <Property Name="SplitUnits" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="SplitTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="RaceEntry" Relationship="Self.FK__Splits__47DBAE45" FromRole="Splits" ToRole="RaceEntry" />
+        </EntityType>
+        <EntityType Name="StartFinishTime">
+          <Key>
+            <PropertyRef Name="BibNumber" />
+            <PropertyRef Name="RaceID" />
+          </Key>
+          <Property Name="BibNumber" Type="Int32" Nullable="false" />
+          <Property Name="RaceID" Type="Int32" Nullable="false" />
+          <Property Name="StartTime" Type="DateTime" Precision="3" />
+          <Property Name="FinishTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="RaceEntry" Relationship="Self.FK__StartFinishTimes__4E88ABD4" FromRole="StartFinishTimes" ToRole="RaceEntry" />
+        </EntityType>
+        <Association Name="FK__RaceEntry__RaceI__44FF419A">
+          <End Role="Races" Type="Self.Race" Multiplicity="1" />
+          <End Role="RaceEntry" Type="Self.RaceEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Races">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RaceEntry">
+              <PropertyRef Name="RaceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RaceEntry__Runne__440B1D61">
+          <End Role="Runners" Type="Self.Runner" Multiplicity="0..1" />
+          <End Role="RaceEntry" Type="Self.RaceEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Runners">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RaceEntry">
+              <PropertyRef Name="RunnerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Splits__47DBAE45">
+          <End Role="RaceEntry" Type="Self.RaceEntry" Multiplicity="0..1" />
+          <End Role="Splits" Type="Self.Split" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RaceEntry">
+              <PropertyRef Name="RaceID" />
+              <PropertyRef Name="BibNumber" />
+            </Principal>
+            <Dependent Role="Splits">
+              <PropertyRef Name="RaceID" />
+              <PropertyRef Name="BibNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StartFinishTimes__4E88ABD4">
+          <End Role="RaceEntry" Type="Self.RaceEntry" Multiplicity="1" />
+          <End Role="StartFinishTimes" Type="Self.StartFinishTime" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="RaceEntry">
+              <PropertyRef Name="RaceID" />
+              <PropertyRef Name="BibNumber" />
+            </Principal>
+            <Dependent Role="StartFinishTimes">
+              <PropertyRef Name="RaceID" />
+              <PropertyRef Name="BibNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RaceTimeManagerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="RaceEntries" EntityType="Self.RaceEntry" />
+          <EntitySet Name="Races" EntityType="Self.Race" />
+          <EntitySet Name="Runners" EntityType="Self.Runner" />
+          <EntitySet Name="Splits" EntityType="Self.Split" />
+          <EntitySet Name="StartFinishTimes" EntityType="Self.StartFinishTime" />
+          <AssociationSet Name="FK__RaceEntry__RaceI__44FF419A" Association="Self.FK__RaceEntry__RaceI__44FF419A">
+            <End Role="Races" EntitySet="Races" />
+            <End Role="RaceEntry" EntitySet="RaceEntries" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RaceEntry__Runne__440B1D61" Association="Self.FK__RaceEntry__Runne__440B1D61">
+            <End Role="Runners" EntitySet="Runners" />
+            <End Role="RaceEntry" EntitySet="RaceEntries" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Splits__47DBAE45" Association="Self.FK__Splits__47DBAE45">
+            <End Role="RaceEntry" EntitySet="RaceEntries" />
+            <End Role="Splits" EntitySet="Splits" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StartFinishTimes__4E88ABD4" Association="Self.FK__StartFinishTimes__4E88ABD4">
+            <End Role="RaceEntry" EntitySet="RaceEntries" />
+            <End Role="StartFinishTimes" EntitySet="StartFinishTimes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RaceTimeManagerEntityStoreContainer" CdmEntityContainer="RaceTimeManagerEntities">
+          <EntitySetMapping Name="RaceEntries">
+            <EntityTypeMapping TypeName="RaceTimeManagerEntity.RaceEntry">
+              <MappingFragment StoreEntitySet="RaceEntry">
+                <ScalarProperty Name="RaceID" ColumnName="RaceID" />
+                <ScalarProperty Name="BibNumber" ColumnName="BibNumber" />
+                <ScalarProperty Name="RunnerID" ColumnName="RunnerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Races">
+            <EntityTypeMapping TypeName="RaceTimeManagerEntity.Race">
+              <MappingFragment StoreEntitySet="Races">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RaceName" ColumnName="RaceName" />
+                <ScalarProperty Name="RaceDate" ColumnName="RaceDate" />
+                <ScalarProperty Name="Distance" ColumnName="Distance" />
+                <ScalarProperty Name="Units" ColumnName="Units" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Runners">
+            <EntityTypeMapping TypeName="RaceTimeManagerEntity.Runner">
+              <MappingFragment StoreEntitySet="Runners">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Splits">
+            <EntityTypeMapping TypeName="RaceTimeManagerEntity.Split">
+              <MappingFragment StoreEntitySet="Splits">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="BibNumber" ColumnName="BibNumber" />
+                <ScalarProperty Name="RaceID" ColumnName="RaceID" />
+                <ScalarProperty Name="SplitDistance" ColumnName="SplitDistance" />
+                <ScalarProperty Name="SplitUnits" ColumnName="SplitUnits" />
+                <ScalarProperty Name="SplitTime" ColumnName="SplitTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StartFinishTimes">
+            <EntityTypeMapping TypeName="RaceTimeManagerEntity.StartFinishTime">
+              <MappingFragment StoreEntitySet="StartFinishTimes">
+                <ScalarProperty Name="BibNumber" ColumnName="BibNumber" />
+                <ScalarProperty Name="RaceID" ColumnName="RaceID" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="FinishTime" ColumnName="FinishTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

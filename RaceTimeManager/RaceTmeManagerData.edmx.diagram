@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6029448f8bd447c48db8359018cef418" Name="Diagram1" ZoomLevel="128">
+        <EntityTypeShape EntityType="RaceTimeManagerEntity.RaceEntry" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RaceTimeManagerEntity.Race" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RaceTimeManagerEntity.Runner" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RaceTimeManagerEntity.Split" Width="1.5" PointX="5.25" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RaceTimeManagerEntity.StartFinishTime" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
+        <AssociationConnector Association="RaceTimeManagerEntity.FK__RaceEntry__RaceI__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="RaceTimeManagerEntity.FK__RaceEntry__Runne__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="RaceTimeManagerEntity.FK__Splits__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="RaceTimeManagerEntity.FK__StartFinishTimes__4E88ABD4" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

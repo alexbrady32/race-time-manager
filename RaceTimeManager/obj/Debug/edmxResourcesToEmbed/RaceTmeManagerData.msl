@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="RaceTimeManagerEntityStoreContainer" CdmEntityContainer="RaceTimeManagerEntities">
+    <EntitySetMapping Name="RaceEntries">
+      <EntityTypeMapping TypeName="RaceTimeManagerEntity.RaceEntry">
+        <MappingFragment StoreEntitySet="RaceEntry">
+          <ScalarProperty Name="RaceID" ColumnName="RaceID" />
+          <ScalarProperty Name="BibNumber" ColumnName="BibNumber" />
+          <ScalarProperty Name="RunnerID" ColumnName="RunnerID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Races">
+      <EntityTypeMapping TypeName="RaceTimeManagerEntity.Race">
+        <MappingFragment StoreEntitySet="Races">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="RaceName" ColumnName="RaceName" />
+          <ScalarProperty Name="RaceDate" ColumnName="RaceDate" />
+          <ScalarProperty Name="Distance" ColumnName="Distance" />
+          <ScalarProperty Name="Units" ColumnName="Units" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Runners">
+      <EntityTypeMapping TypeName="RaceTimeManagerEntity.Runner">
+        <MappingFragment StoreEntitySet="Runners">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Splits">
+      <EntityTypeMapping TypeName="RaceTimeManagerEntity.Split">
+        <MappingFragment StoreEntitySet="Splits">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="BibNumber" ColumnName="BibNumber" />
+          <ScalarProperty Name="RaceID" ColumnName="RaceID" />
+          <ScalarProperty Name="SplitDistance" ColumnName="SplitDistance" />
+          <ScalarProperty Name="SplitUnits" ColumnName="SplitUnits" />
+          <ScalarProperty Name="SplitTime" ColumnName="SplitTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StartFinishTimes">
+      <EntityTypeMapping TypeName="RaceTimeManagerEntity.StartFinishTime">
+        <MappingFragment StoreEntitySet="StartFinishTimes">
+          <ScalarProperty Name="BibNumber" ColumnName="BibNumber" />
+          <ScalarProperty Name="RaceID" ColumnName="RaceID" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="FinishTime" ColumnName="FinishTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

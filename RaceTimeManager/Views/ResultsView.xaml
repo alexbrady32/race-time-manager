@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="RaceTimeManager.Views.ResultsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RaceTimeManager.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="600">
+    <TabControl SelectedIndex="{Binding TabViewSelectedIndex}">
+        <TabItem Visibility="Collapsed">
+            <StackPanel Orientation="Horizontal">
+                <ListBox ItemsSource="{Binding RaceList}" SelectedIndex="{Binding RaceSelectedIndex}" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" Width="200" >
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding RaceName}" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <Button Command="{Binding OverallResults}" Content="Overall Results" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100"/>
+            </StackPanel>
+
+        </TabItem>
+        <TabItem Visibility="Collapsed">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Button Grid.Row="0" Grid.Column="0" Content="Main Menu" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Command="{Binding MainMenu}"/>
+                <DataGrid Grid.Row="1" Grid.Column="0" ItemsSource="{Binding ResultsList}" AutoGenerateColumns="False" CanUserAddRows="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="BibNumber"
+                      Binding="{Binding BibNumber}"/>
+                        <DataGridTextColumn Header="FirstName"
+                      Binding="{Binding RaceEntry.Runner.FirstName}"/>
+                        <DataGridTextColumn Header="FirstName"
+                      Binding="{Binding RaceEntry.Runner.LastName}"/>
+                        <DataGridTextColumn Header="StartTime"
+                      Binding="{Binding StartTime, StringFormat=\{0:hh:mm:ss \}}"/>
+                        <DataGridTextColumn Header="Finish Time"
+                      Binding="{Binding FinishTime, StringFormat=\{0:hh:mm:ss \}}"/>
+                        
+
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </TabItem>
+    </TabControl>
+</UserControl>

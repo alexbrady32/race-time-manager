@@ -1,0 +1,9 @@
+C:\Users\alebr\Desktop\Classes\W16\Database\RaceTimeManager\RaceTimeManager\bin\Release\RaceTimeManager.exe.config
+C:\Users\alebr\Desktop\Classes\W16\Database\RaceTimeManager\RaceTimeManager\obj\Release\Views\AddRunnerView.baml
+C:\Users\alebr\Desktop\Classes\W16\Database\RaceTimeManager\RaceTimeManager\obj\Release\Views\AddRunnerView.g.cs
+C:\Users\alebr\Desktop\Classes\W16\Database\RaceTimeManager\RaceTimeManager\obj\Release\MainWindow.g.cs
+C:\Users\alebr\Desktop\Classes\W16\Database\RaceTimeManager\RaceTimeManager\obj\Release\App.g.cs
+C:\Users\alebr\Desktop\Classes\W16\Database\RaceTimeManager\RaceTimeManager\obj\Release\RaceTimeManager_Content.g.cs
+C:\Users\alebr\Desktop\Classes\W16\Database\RaceTimeManager\RaceTimeManager\obj\Release\GeneratedInternalTypeHelper.g.cs
+C:\Users\alebr\Desktop\Classes\W16\Database\RaceTimeManager\RaceTimeManager\obj\Release\RaceTimeManager_MarkupCompile.cache
+C:\Users\alebr\Desktop\Classes\W16\Database\RaceTimeManager\RaceTimeManager\obj\Release\RaceTimeManager_MarkupCompile.lref

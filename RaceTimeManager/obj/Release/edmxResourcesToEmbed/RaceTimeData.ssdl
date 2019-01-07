@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RaceTimeManagerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Races">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RaceName" Type="varchar" MaxLength="50" />
+    <Property Name="RaceDate" Type="date" />
+    <Property Name="Distance" Type="decimal" Precision="14" Scale="8" />
+    <Property Name="Units" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Runners">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="25" />
+    <Property Name="LastName" Type="varchar" MaxLength="25" />
+    <Property Name="DOB" Type="date" />
+  </EntityType>
+  <EntityType Name="Splits">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RunnerID" Type="int" />
+    <Property Name="RaceID" Type="int" />
+    <Property Name="SplitDistance" Type="decimal" Precision="14" Scale="8" />
+    <Property Name="SplitUnits" Type="varchar" MaxLength="10" />
+    <Property Name="SplitTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="StartFinishTimes">
+    <Key>
+      <PropertyRef Name="RunnerID" />
+      <PropertyRef Name="RaceID" />
+    </Key>
+    <Property Name="RunnerID" Type="int" Nullable="false" />
+    <Property Name="RaceID" Type="int" Nullable="false" />
+    <Property Name="StartTime" Type="datetime" />
+    <Property Name="FinishTime" Type="datetime" />
+  </EntityType>
+  <Association Name="FK__Splits__RaceID__15502E78">
+    <End Role="Races" Type="Self.Races" Multiplicity="0..1" />
+    <End Role="Splits" Type="Self.Splits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Races">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Splits">
+        <PropertyRef Name="RaceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Splits__RunnerID__145C0A3F">
+    <End Role="Runners" Type="Self.Runners" Multiplicity="0..1" />
+    <End Role="Splits" Type="Self.Splits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Runners">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Splits">
+        <PropertyRef Name="RunnerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__StartFini__RaceI__1920BF5C">
+    <End Role="Races" Type="Self.Races" Multiplicity="1" />
+    <End Role="StartFinishTimes" Type="Self.StartFinishTimes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Races">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="StartFinishTimes">
+        <PropertyRef Name="RaceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__StartFini__Runne__182C9B23">
+    <End Role="Runners" Type="Self.Runners" Multiplicity="1" />
+    <End Role="StartFinishTimes" Type="Self.StartFinishTimes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Runners">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="StartFinishTimes">
+        <PropertyRef Name="RunnerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="RaceTimeManagerModelStoreContainer">
+    <EntitySet Name="Races" EntityType="Self.Races" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Runners" EntityType="Self.Runners" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Splits" EntityType="Self.Splits" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StartFinishTimes" EntityType="Self.StartFinishTimes" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Splits__RaceID__15502E78" Association="Self.FK__Splits__RaceID__15502E78">
+      <End Role="Races" EntitySet="Races" />
+      <End Role="Splits" EntitySet="Splits" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Splits__RunnerID__145C0A3F" Association="Self.FK__Splits__RunnerID__145C0A3F">
+      <End Role="Runners" EntitySet="Runners" />
+      <End Role="Splits" EntitySet="Splits" />
+    </AssociationSet>
+    <AssociationSet Name="FK__StartFini__RaceI__1920BF5C" Association="Self.FK__StartFini__RaceI__1920BF5C">
+      <End Role="Races" EntitySet="Races" />
+      <End Role="StartFinishTimes" EntitySet="StartFinishTimes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__StartFini__Runne__182C9B23" Association="Self.FK__StartFini__Runne__182C9B23">
+      <End Role="Runners" EntitySet="Runners" />
+      <End Role="StartFinishTimes" EntitySet="StartFinishTimes" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

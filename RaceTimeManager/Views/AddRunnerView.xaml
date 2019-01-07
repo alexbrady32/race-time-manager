@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="RaceTimeManager.Views.AddRunnerView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignHeight="400" d:DesignWidth="600"
+        >
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Button Grid.Row="0" Grid.Column="0" Content="Main Menu" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Command="{Binding MainMenu}"/>
+        <Label Content="First Name" Grid.Row="1" Grid.Column="0"/>
+        <Label Content="Last Name" Grid.Row="1" Grid.Column="1"/>
+        <Label Content="DOB" Grid.Row="1" Grid.Column="2"/>
+        <TextBox x:Name="runnerFirstName" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding FirstName, Mode=TwoWay}" VerticalAlignment="Top" Width="120" />
+        <TextBox x:Name="runnerLastName" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding LastName}" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="runnerDOB" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding DateOfBirth}" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="addRunnerButton" Grid.Row="3" Grid.Column="0" Content="Add Runner" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Command="{Binding AddRunner}"/>
+        <DataGrid x:Name="runnersList" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" ItemsSource="{Binding RunnerList}" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID"
+                      Binding="{Binding ID}"/>
+                <DataGridTextColumn Header="First Name"
+                      Binding="{Binding FirstName}"/>
+                <DataGridTextColumn Header="Last Name"
+                      Binding="{Binding LastName}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>
